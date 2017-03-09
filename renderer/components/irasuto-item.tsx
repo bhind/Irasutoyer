@@ -92,7 +92,7 @@ export default class IrasutoItem extends React.Component<Props, {}> {
                     secondaryText={secondaryText}
                     secondaryTextLines={2}
                     style={{height: '108px'}}
-                    onTouchTap={() => openExternal(irasuto.detail_url)}
+                    onClick={() => openExternal(irasuto.detail_url)}
                 />
                 <ListDivider inset/>
             </div>
