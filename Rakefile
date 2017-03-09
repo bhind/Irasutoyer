@@ -4,6 +4,7 @@ include FileUtils
 ROOT = __dir__.freeze
 BIN = "#{ROOT}/node_modules/.bin".freeze
 
+
 def cmd_exists?(cmd)
   File.exists?(cmd) && File.executable?(cmd)
 end
@@ -20,14 +21,19 @@ def ensure_cmd(cmd)
   end
 end
 
+def directory_exists?(directory)
+  File.directory?(directory)
+end
+
 file 'node_modules' do
   ensure_cmd 'npm'
   sh 'npm install'
 end
 
-file 'typings' do
-  ensure_cmd 'tsd'
-  sh 'tsd install'
+task :typings do
+  if not File.exists?('typings/tsd.d.ts') then
+    sh 'tsd install'
+  end
 end
 
 # %i() is unavailable because of version of Ruby on Travis
